@@ -1,34 +1,68 @@
-# Gradle files
+# ─────────────────────────────────────────────
+# Android / Gradle
+# ─────────────────────────────────────────────
 .gradle/
 build/
-
-# Local configuration file (sdk path, etc)
 local.properties
-
-# Log/OS Files
-*.log
-
-# Android Studio generated files and folders
 captures/
 .externalNativeBuild/
 .cxx/
 *.aab
 *.apk
 output-metadata.json
+*.hprof
+lint-results*.html
+lint-results*.xml
 
-# IntelliJ
+# 서명 키 (절대 커밋 금지)
+*.jks
+*.keystore
+keystore.properties
+
+# Google Services (API 키 포함)
+google-services.json
+
+# ─────────────────────────────────────────────
+# Arduino / ESP32 / PlatformIO
+# ─────────────────────────────────────────────
+# arduino-cli / Arduino IDE 빌드 산출물
+build/
+*.bin
+*.elf
+*.hex
+*.map
+*.d
+*.o
+*.a
+
+# PlatformIO
+.pio/
+.pioenvs/
+.piolibdeps/
+.clang_complete
+.gcc-flags.json
+
+# 라이브러리 의존성 (필요한 것은 명시적으로 문서화)
+firmware/**/libraries/
+
+# ─────────────────────────────────────────────
+# IDE / 에디터
+# ─────────────────────────────────────────────
+# IntelliJ / Android Studio
 *.iml
 .idea/
 misc.xml
 deploymentTargetDropDown.xml
 render.experimental.xml
 
-# Keystore files
-*.jks
-*.keystore
+# VS Code (프로젝트 공용 설정은 필요하면 예외 처리)
+.vscode/
 
-# Google Services (e.g. APIs or Firebase)
-google-services.json
-
-# Android Profiling
-*.hprof
+# ─────────────────────────────────────────────
+# OS / 기타
+# ─────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+*.log
+*.swp
+*~
