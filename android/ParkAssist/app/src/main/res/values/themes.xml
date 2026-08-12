@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--
+        실제 색은 Compose(ui/theme/Theme.kt)가 정한다. 여기서는 앱이 뜨는 순간의
+        배경만 맞춰서 흰 화면이 번쩍이지 않게 한다.
+    -->
+    <style name="Theme.ParkAssist" parent="android:Theme.Material.NoActionBar">
+        <item name="android:windowBackground">@color/background</item>
+        <item name="android:statusBarColor">@color/background</item>
+        <item name="android:navigationBarColor">@color/background</item>
+    </style>
+</resources>

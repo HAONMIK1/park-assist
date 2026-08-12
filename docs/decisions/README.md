@@ -47,3 +47,5 @@
 | --- | --- | --- |
 | [0001](0001-buzzer-direct-drive.md) | 부저는 ESP32 직결, BLE와 독립 | 채택됨 |
 | [0002](0002-sequential-sensor-firing.md) | 초음파 센서 순차 발사 | 채택됨 |
+| [0003](0003-app-alarm-and-drive-mode.md) | 앱 경고음과 주행 모드 | 채택됨 |
+| [0004](0004-two-device-split.md) | 전방·후방을 기기 두 대로 분리 | 채택됨 |

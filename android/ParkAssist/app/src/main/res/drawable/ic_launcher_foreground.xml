@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    위에서 본 차 + 뒤쪽 3단 경보 밴드.
+    안전 영역(중앙 72x72 = 18~90) 안에 들어가도록 배치했다.
+-->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+
+    <!-- 차체 -->
+    <path
+        android:fillColor="#D8DEE7"
+        android:pathData="M48,26 H60 A6,6 0 0 1 66,32 V54 A6,6 0 0 1 60,60 H48 A6,6 0 0 1 42,54 V32 A6,6 0 0 1 48,26 Z" />
+
+    <!-- 캐빈 (앞쪽) -->
+    <path
+        android:fillColor="#5A6675"
+        android:pathData="M49,33 H59 A4,4 0 0 1 63,37 V45 A4,4 0 0 1 59,49 H49 A4,4 0 0 1 45,45 V37 A4,4 0 0 1 49,33 Z" />
+
+    <!-- 경보 밴드 — 차에 가까울수록 위험한 색 -->
+    <path
+        android:fillColor="#FF3B30"
+        android:pathData="M46,66 H62 A2.5,2.5 0 0 1 62,71 H46 A2.5,2.5 0 0 1 46,66 Z" />
+    <path
+        android:fillColor="#FFA318"
+        android:pathData="M41,76 H67 A2.5,2.5 0 0 1 67,81 H41 A2.5,2.5 0 0 1 41,76 Z" />
+    <path
+        android:fillColor="#2FD46B"
+        android:pathData="M36,86 H72 A2.5,2.5 0 0 1 72,91 H36 A2.5,2.5 0 0 1 36,86 Z" />
+</vector>
