@@ -66,3 +66,6 @@ Thumbs.db
 *.log
 *.swp
 *~
+
+# 화면 목업 중간 산출물 (tools/render-screens.py 가 생성, PNG만 커밋한다)
+docs/images/*.html

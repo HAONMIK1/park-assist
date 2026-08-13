@@ -116,7 +116,7 @@ private fun DrawScope.drawBands(
     zone: SensorZone,
     pulseAlpha: Float,
 ) {
-    val bandStroke = radius * 0.062f
+    val bandStroke = radius * BAND_STROKE_RATIO
     val sectorSweep = TOTAL_SWEEP / BAND_SECTORS
 
     channels.forEachIndexed { index, channel ->
@@ -204,9 +204,20 @@ private const val TOTAL_SWEEP = 150f
 private const val BAND_SECTORS = 4
 private const val SECTOR_GAP = 3.5f
 
+// 아래 비율은 전부 반지름(radius) 기준이다. 바깥쪽 끝이 링에 닿지 않도록 잡혀 있다.
+//
+//   차 절반          0.310
+// + 가장 바깥 밴드   0.490  (0.20 + 2 × 0.145)
+// + 밴드 두께 절반   0.043
+// ─────────────────────────
+//   최대 반경        0.843   ← 링 안쪽(약 0.976)까지 여유 0.13
+//
+// 대상 사용자가 60대라 크게 보이는 쪽이 낫다. 이 값을 키울 때는 위 합이 0.95를
+// 넘지 않는지 확인할 것 — 넘으면 부채꼴이 링을 뚫고 나간다.
 private const val BAND_COUNT = 3
-private const val FIRST_BAND_RATIO = 0.16f
-private const val BAND_SPACING_RATIO = 0.105f
+private const val FIRST_BAND_RATIO = 0.20f
+private const val BAND_SPACING_RATIO = 0.145f
+private const val BAND_STROKE_RATIO = 0.085f
 
-private const val CAR_WIDTH_RATIO = 0.28f
-private const val CAR_HEIGHT_RATIO = 0.56f
+private const val CAR_WIDTH_RATIO = 0.32f
+private const val CAR_HEIGHT_RATIO = 0.62f

@@ -8,7 +8,6 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -81,9 +80,11 @@ fun MainScreen(
             CarRadar(
                 rear = state.channels(SensorZone.REAR),
                 front = state.channels(SensorZone.FRONT),
+                // aspectRatio(1f) + fillMaxWidth 로 잡으면 세로가 짧은 기기에서 정사각형이
+                // 남은 공간을 넘어 아래 요소를 덮는다. CarRadar 가 min(width, height) 로
+                // 반지름을 잡으므로 fillMaxSize 만으로 항상 원이 유지된다.
                 modifier = Modifier
-                    .fillMaxWidth()
-                    .aspectRatio(1f)
+                    .fillMaxSize()
                     .padding(4.dp),
             )
         }
