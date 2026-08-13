@@ -27,7 +27,10 @@ val LevelCritical = Color(0xFFFF1F14)
 val BandIdle = Color(0xFF232B36)
 
 val CarBody = Color(0xFFD8DEE7)
-val CarGlass = Color(0xFF56617180)
+
+/** 차체 위에 얹는 캐빈. 알파 0x56(34%)이라 차체 색이 비쳐 보인다. */
+val CarGlass = Color(0x56617180)
+
 val GuideLine = Color(0xFF3A4552)
 
 fun ProximityLevel.color(): Color = when (this) {
