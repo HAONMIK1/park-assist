@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 알림 아이콘은 시스템이 단색으로 칠하므로 흰색 실루엣만 그린다. -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24"
+    android:tint="#FFFFFF">
+
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M9.5,3 H14.5 A2.5,2.5 0 0 1 17,5.5 V13 A2.5,2.5 0 0 1 14.5,15.5 H9.5 A2.5,2.5 0 0 1 7,13 V5.5 A2.5,2.5 0 0 1 9.5,3 Z" />
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M9,17.2 H15 A1,1 0 0 1 15,19.2 H9 A1,1 0 0 1 9,17.2 Z" />
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M6.5,20.6 H17.5 A1,1 0 0 1 17.5,22.6 H6.5 A1,1 0 0 1 6.5,20.6 Z" />
+</vector>

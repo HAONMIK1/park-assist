@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- ui/theme/Color.kt 의 Background 와 같은 값이어야 한다. -->
+    <color name="background">#FF070A0F</color>
+    <color name="ring_accent">#FF2E9BFF</color>
+</resources>
