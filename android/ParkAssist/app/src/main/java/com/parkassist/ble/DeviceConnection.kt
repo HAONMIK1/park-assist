@@ -102,10 +102,15 @@ class DeviceConnection(
     // ── GATT 작업 큐 ────────────────────────────────────────────────
     // BLE는 한 번에 하나의 GATT 작업만 허용한다. 겹쳐 부르면 조용히 실패한다.
 
+    /**
+     * [exec]가 마지막 파라미터인 이유: 대부분의 작업은 결과를 기다리지 않아서
+     * `GattOp("이름") { ... }` 형태로 쓴다. 순서를 바꾸면 후행 람다가 [result]에
+     * 붙어서 컴파일이 깨진다.
+     */
     private class GattOp(
         val name: String,
-        val exec: () -> Boolean,
         val result: CompletableDeferred<Boolean>? = null,
+        val exec: () -> Boolean,
     )
 
     private val opLock = Any()
@@ -499,7 +504,7 @@ class DeviceConnection(
         val ch = rxChar ?: return false
 
         val deferred = CompletableDeferred<Boolean>()
-        val op = GattOp("write RX", { performWrite(g, ch, payload) }, deferred)
+        val op = GattOp("write RX", deferred) { performWrite(g, ch, payload) }
         enqueue(op)
 
         val result = withTimeoutOrNull(BleConstants.GATT_OP_TIMEOUT_MS) { deferred.await() }
