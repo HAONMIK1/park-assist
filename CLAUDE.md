@@ -143,8 +143,14 @@ arduino-cli upload  --fqbn esp32:esp32:esp32 -p /dev/ttyUSB0 firmware/park-assis
 ```bash
 cd android/ParkAssist
 ./gradlew assembleDebug
-./gradlew test          # protocol 계층 단위 테스트 (47개)
+./gradlew testDebugUnitTest   # protocol 계층 단위 테스트 (47개)
 ```
+
+### CI
+
+`.github/workflows/ci.yml`가 PR마다 **앱 빌드·테스트와 펌웨어 컴파일을 둘 다** 돌린다.
+앱과 펌웨어는 BLE 규격으로만 붙어 있어서 한쪽만 고치면 조용히 어긋나기 때문이다.
+로컬에 Android SDK나 ESP32 툴체인이 없어도 CI가 대신 잡아준다.
 
 ## 안드로이드 구조
 

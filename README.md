@@ -97,8 +97,13 @@ arduino-cli upload --fqbn esp32:esp32:esp32 -p /dev/ttyUSB0 firmware/park-assist
 cd android/ParkAssist
 ./gradlew assembleDebug        # 디버그 APK 빌드
 ./gradlew installDebug         # 연결된 기기에 설치
-./gradlew test                 # 단위 테스트
+./gradlew testDebugUnitTest    # 단위 테스트 (47개)
 ```
+
+### CI
+
+PR마다 `.github/workflows/ci.yml`가 **앱 빌드·테스트와 펌웨어 컴파일을 함께** 돌린다.
+둘은 BLE 규격으로만 붙어 있어서 한쪽만 고치면 조용히 어긋난다.
 
 **실기기 없이 확인하려면** 앱 설정 화면에서 **목업 모드**를 켠다. 전방·후방 양쪽에
 가짜 데이터가 흐르고, 주차 접근 / 사각지대 진입 / 센서 고장 / 주행 중 급접근 상황이

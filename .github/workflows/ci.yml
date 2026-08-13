@@ -1,0 +1,75 @@
+name: CI
+
+# 앱과 펌웨어는 BLE 패킷 규격으로만 붙어 있어서, 한쪽만 고치면 조용히 어긋난다.
+# 그래서 둘 다 매번 빌드한다.
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+# 같은 브랜치에 연달아 푸시하면 이전 실행은 취소한다.
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  android:
+    name: 안드로이드 빌드와 테스트
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: android/ParkAssist
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: JDK 17 설치
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      - name: Gradle 준비
+        uses: gradle/actions/setup-gradle@v4
+
+      # protocol 계층 단위 테스트. Android 의존성이 0이라 에뮬레이터 없이 돈다.
+      # 여기서 깨지면 docs/ble-protocol.md 와 코드가 갈라진 것이다.
+      - name: 단위 테스트
+        run: ./gradlew testDebugUnitTest
+
+      - name: 디버그 APK 빌드
+        run: ./gradlew assembleDebug
+
+      - name: Lint
+        run: ./gradlew lintDebug
+        continue-on-error: true
+
+      - name: 테스트 리포트 업로드
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: android-test-report
+          path: android/ParkAssist/app/build/reports/
+          retention-days: 7
+          if-no-files-found: ignore
+
+  firmware:
+    name: 펌웨어 컴파일
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      # 앞뒤 유닛은 ZONE_IS_REAR 매크로만 다르고 나머지가 같다. 저장된 값(후방=1)으로
+      # 한 번만 컴파일한다 — 매크로가 문자열 상수 하나만 바꾸므로 양쪽을 다 굽는 의미가 없다.
+      - name: 스케치 컴파일 (ESP32 Dev Module)
+        uses: arduino/compile-sketches@v1
+        with:
+          fqbn: esp32:esp32:esp32
+          platforms: |
+            - name: esp32:esp32
+              source-url: https://raw.githubusercontent.com/espressif/arduino-esp32/gh-pages/package_esp32_index.json
+          sketch-paths: |
+            - firmware/park-assist-fw
+          enable-warnings-report: true
+          verbose: false
